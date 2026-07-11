@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harusi ya Arnold Bukangwa — Toa Ahadi Yako</title>
+<meta property="og:title" content="Harusi ya Arnold Bukangwa 💍">
+<meta property="og:description" content="Tunakualika kushiriki katika harusi ya Arnold. Tarehe 22 Agosti 2026. Bonyeza kutoa ahadi yako! 💕">
+<meta property="og:type" content="website">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --sage:#6B8E6F; --sage-deep:#3E5E45; --sage-soft:#DCE8DA; --leaf:#8BAA88;
+  --gold:#C4A24C; --gold-soft:#EAD9A8; --cream:#F4F7F0; --card:#FDFEFB;
+  --ink:#33422F; --muted:#8B9A85; --line:#DBE4D5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Segoe UI',serif;background:
+  radial-gradient(circle at 15% 8%, rgba(139,170,136,.28), transparent 34%),
+  radial-gradient(circle at 88% 92%, rgba(107,142,111,.24), transparent 36%),
+  radial-gradient(circle at 92% 6%, rgba(196,162,76,.14), transparent 26%),
+  linear-gradient(160deg,#E9F0E4,#D9E6D6);
+  color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;line-height:1.55}
+.card{background:var(--card);border-radius:20px;width:100%;max-width:440px;
+  box-shadow:0 22px 60px rgba(62,94,69,.28);overflow:hidden;
+  border:1px solid var(--line);position:relative}
+.card::before{content:'';position:absolute;inset:7px;border:1.5px solid var(--gold-soft);border-radius:14px;pointer-events:none;z-index:3}
+.hero{background:linear-gradient(160deg,#7A9C7C,#5A7D5F);padding:38px 30px 30px;text-align:center;position:relative}
+.hero::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:24px;background:var(--card);border-radius:24px 24px 0 0}
+.sprig{font-size:19px;color:var(--gold-soft);letter-spacing:8px;margin-bottom:10px}
+.badge{display:inline-block;color:#F4F7F0;font-size:11.5px;font-weight:600;letter-spacing:.22em;margin-bottom:10px;font-family:'Segoe UI',sans-serif;opacity:.9}
+.hero h1{color:#fff;font-size:27px;font-weight:700;letter-spacing:.01em;text-shadow:0 1px 3px rgba(0,0,0,.15)}
+.hero .date{color:#EAF1E7;font-size:13.5px;margin-top:7px;font-weight:600;font-family:'Segoe UI',sans-serif}
+.body{padding:10px 30px 32px}
+.intro{text-align:center;color:var(--muted);font-size:14px;margin-bottom:22px;font-style:italic}
+.intro span{font-style:normal;font-size:12px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:7px;color:var(--sage-deep);font-family:'Segoe UI',sans-serif}
+.field label small{color:var(--muted);font-weight:400}
+.field input,.field select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;font-size:15px;background:#FAFCF8;transition:border .15s;font-family:'Segoe UI',sans-serif;color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--sage);background:#fff;box-shadow:0 0 0 3px rgba(107,142,111,.12)}
+.amount-row{display:flex;gap:10px}
+.amount-row .amt{flex:1}
+.amount-row .cur{width:104px}
+.submit{width:100%;padding:15px;background:linear-gradient(160deg,#6B8E6F,#4F7255);color:#fff;border:none;border-radius:12px;font-size:15.5px;font-weight:700;cursor:pointer;transition:all .18s;margin-top:8px;font-family:'Segoe UI',sans-serif;letter-spacing:.01em;box-shadow:0 4px 14px rgba(79,114,85,.3)}
+.submit:hover{background:linear-gradient(160deg,#5A7D5F,#43654A);box-shadow:0 6px 20px rgba(79,114,85,.4)}
+.submit:disabled{opacity:.55;cursor:not-allowed}
+.foot{text-align:center;margin-top:20px;color:var(--muted);font-size:12px;font-family:'Segoe UI',sans-serif}
+.foot b{color:var(--sage-deep)}
+.blessing{text-align:center;margin-top:14px;font-style:italic;color:var(--sage);font-size:13px}
+.msg{padding:12px 15px;border-radius:10px;font-size:13.5px;margin-bottom:16px;display:none;font-family:'Segoe UI',sans-serif}
+.msg.err{background:#F6E0DE;color:#9A3B33;display:block}
+.msg.ok{background:var(--sage-soft);color:var(--sage-deep);display:block}
+.success{text-align:center;padding:14px 0}
+.success .tick{width:76px;height:76px;border-radius:50%;background:linear-gradient(160deg,#6B8E6F,#4F7255);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:38px;color:#fff;box-shadow:0 6px 20px rgba(79,114,85,.35)}
+.success h2{font-size:22px;margin-bottom:8px;color:var(--sage-deep)}
+.success p{color:var(--muted);font-size:14px;margin-bottom:22px}
+.pay{background:#F3F7EF;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:left;font-size:13px;margin-bottom:18px;font-family:'Segoe UI',sans-serif}
+.pay h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--sage);margin-bottom:9px}
+.pay .line{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line)}
+.pay .line:last-child{border:none}
+.pay .line b{color:var(--sage-deep)}
+.linkbtn{background:none;border:1.5px solid var(--line);color:var(--sage-deep);padding:11px;border-radius:11px;font-size:13.5px;font-weight:600;cursor:pointer;width:100%;font-family:'Segoe UI',sans-serif}
+.linkbtn:hover{border-color:var(--sage);background:#F3F7EF}
+
+.quote{text-align:center;padding:18px 24px 4px;font-style:italic;color:var(--sage);font-size:14.5px;line-height:1.6;position:relative}
+.quote::before{content:'"';font-size:44px;color:var(--gold-soft);position:absolute;left:14px;top:2px;font-family:Georgia,serif;line-height:1}
+.divider{display:flex;align-items:center;gap:12px;margin:22px 4px;color:var(--gold)}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.divider .leaf{font-size:15px;color:var(--sage);letter-spacing:3px}
+.couple{text-align:center;padding:4px 24px 6px}
+.couple .fam{font-size:13px;color:var(--muted);font-family:'Segoe UI',sans-serif}
+.couple .fam b{color:var(--sage-deep)}
+.steps{display:flex;flex-direction:column;gap:12px;margin:6px 4px 20px}
+.step{display:flex;gap:13px;align-items:flex-start;background:#F3F7EF;border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.step .n{width:26px;height:26px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Segoe UI',sans-serif}
+.step .t{font-size:13px;font-family:'Segoe UI',sans-serif;color:var(--ink)}
+.step .t b{color:var(--sage-deep);display:block;margin-bottom:1px}
+.countdown{text-align:center;background:linear-gradient(160deg,#EFF5EB,#E4EEDF);border:1px solid var(--line);border-radius:14px;padding:16px;margin:4px 4px 20px;font-family:'Segoe UI',sans-serif}
+.countdown .big{font-size:30px;font-weight:700;color:var(--sage-deep);letter-spacing:-.01em}
+.countdown .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.verse{text-align:center;padding:8px 26px 18px;font-size:13px;color:var(--muted);font-style:italic;line-height:1.6}
+.verse .ref{display:block;font-style:normal;font-size:11.5px;color:var(--sage);margin-top:5px;letter-spacing:.03em;font-family:'Segoe UI',sans-serif}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="hero">
+    <div class="sprig">❦ ❧</div>
+    <div class="badge">HARUSI · DAR ES SALAAM</div>
+    <h1>Arnold Bukangwa</h1>
+    <div class="date">22 Agosti 2026</div>
+  </div>
+  <div class="body">
+    <div id="formWrap">
+      <div class="couple">
+        <p class="fam">Familia ya <b>Eng. A. Bukangwa &amp; Ma Alvera Kasimbazi</b><br>wanafuraha kukualika kushiriki furaha yao</p>
+      </div>
+      <div class="quote">Upendo wa kweli hausherehekewi peke yake — husherehekewa na wote wanaompenda.</div>
+      <div class="countdown">
+        <div class="big" id="cdDays">—</div>
+        <div class="lbl" id="cdLbl">siku zimebaki · days to go</div>
+      </div>
+      <div class="divider"><span class="leaf">🌿 ❦ 🌿</span></div>
+      <p class="intro">Ukiwa ndugu, jamaa na rafiki, unaombwa mchango wako wa hali na mali kufanikisha shughuli hii muhimu.<br><span>Share your pledge to support the celebration.</span></p>
+      <div id="msg" class="msg"></div>
+      <div class="field">
+        <label>Jina Kamili <small>· Full Name</small></label>
+        <input id="pName" type="text" placeholder="Jina lako" autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Nambari ya Simu <small>· Phone</small></label>
+        <input id="pPhone" type="tel" placeholder="07XX XXX XXX" autocomplete="tel">
+      </div>
+      <div class="field">
+        <label>Kiasi cha Ahadi <small>· Pledge Amount</small></label>
+        <div class="amount-row">
+          <input id="pAmount" class="amt" type="number" min="0" placeholder="100000" inputmode="numeric">
+          <select id="pCur" class="cur">
+            <option value="TZS">TZS</option>
+            <option value="RWF">RWF</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+      </div>
+      <button id="submitBtn" class="submit" onclick="sendPledge()">Tuma Ahadi · Send My Pledge</button>
+      <div class="foot">Kwa <b>Arnold Bukangwa</b> · 22.08.2026</div>
+      <div class="blessing">Tunatanguliza shukrani zetu za dhati 🌿<br>Mungu akubariki sana</div>
+      <div class="divider"><span class="leaf">🌿 ❦ 🌿</span></div>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><span class="t"><b>Toa ahadi yako</b>Jaza fomu hii kwa jina, simu na kiasi.</span></div>
+        <div class="step"><span class="n">2</span><span class="t"><b>Tuma mchango</b>Tumia namba za malipo utakazoonyeshwa.</span></div>
+        <div class="step"><span class="n">3</span><span class="t"><b>Tunakushukuru</b>Kamati itathibitisha na kuwasiliana nawe.</span></div>
+      </div>
+      <div class="verse">"Kila mtu na atoe kama alivyokusudia moyoni mwake; si kwa huzuni, wala si kwa lazima; maana Mungu humpenda yeye atoaye kwa moyo wa ukunjufu."<span class="ref">— 2 Wakorintho 9:7</span></div>
+    </div>
+    <div id="successWrap" class="success" style="display:none">
+      <div class="tick">✓</div>
+      <h2>Asante sana! 🌿</h2>
+      <p>Ahadi yako imepokelewa. Mungu akubariki sana.<br><span style="font-size:12.5px">Your pledge has been received.</span></p>
+      <div class="pay">
+        <h4>Namna ya Kulipa · Payment</h4>
+        <div id="payLines"></div>
+      </div>
+      <button class="linkbtn" onclick="resetForm()">Toa ahadi nyingine · Pledge again</button>
+    </div>
+  </div>
+</div>
+<script>
+// ==== CONFIG: paste the SAME Supabase URL + anon key as the command center ====
+const SUPABASE_URL="https://yrnyrmwfsgotwxtextbm.supabase.co";
+const SUPABASE_ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybnlybXdmc2dvdHd4dGV4dGJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM1MjM1NjIsImV4cCI6MjA5OTA5OTU2Mn0.fyPpDdirnj2gxv4q4iqh0IMlPWBM0IoOqJVz_tHGrvs";
+
+const PAY={
+  TZS:[['Stanbic Bank','9120003845239'],['Mixx by Yas','0715123050'],['Selcom/Mpesa','0756444796'],['Jina','Irene Mlaki']],
+  RWF:[['Simu / Momo','0789178174'],['Jina','Andrew Amabilis Bukangwa']],
+  USD:[['Simu / Momo','0789178174'],['Jina','Andrew Amabilis Bukangwa']]
+};
+let sb=null;
+if(SUPABASE_URL&&SUPABASE_ANON) sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON);
+
+function showMsg(t,ok){const m=document.getElementById('msg');m.textContent=t;m.className='msg '+(ok?'ok':'err');}
+function clearMsg(){document.getElementById('msg').className='msg';}
+
+async function sendPledge(){
+  clearMsg();
+  const name=document.getElementById('pName').value.trim();
+  const phone=document.getElementById('pPhone').value.trim();
+  const amount=parseInt(document.getElementById('pAmount').value||'0',10);
+  const currency=document.getElementById('pCur').value;
+  if(!name){showMsg('Tafadhali andika jina lako · Please enter your name');return;}
+  if(!amount||amount<=0){showMsg('Tafadhali andika kiasi · Please enter an amount');return;}
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='Inatuma… · Sending…';
+  try{
+    if(sb){
+      const {error}=await sb.from('pledge_submissions').insert({name,phone,amount,currency,status:'pending'});
+      if(error) throw error;
+    } else {
+      await new Promise(r=>setTimeout(r,600)); // demo mode
+    }
+    // show payment details for chosen currency
+    const lines=PAY[currency].map(([k,v])=>`<div class="line"><span>${k}</span><b>${v}</b></div>`).join('');
+    document.getElementById('payLines').innerHTML=lines;
+    document.getElementById('formWrap').style.display='none';
+    document.getElementById('successWrap').style.display='block';
+  }catch(e){
+    showMsg('Samahani, hitilafu imetokea. Jaribu tena · Error, please try again');
+    btn.disabled=false; btn.textContent='Tuma Ahadi · Send My Pledge';
+  }
+}
+function resetForm(){
+  document.getElementById('pName').value='';
+  document.getElementById('pPhone').value='';
+  document.getElementById('pAmount').value='';
+  document.getElementById('successWrap').style.display='none';
+  document.getElementById('formWrap').style.display='block';
+  const btn=document.getElementById('submitBtn'); btn.disabled=false; btn.textContent='Tuma Ahadi · Send My Pledge';
+  clearMsg();
+}
+// wedding countdown
+(function(){
+  const wedding=new Date('2026-08-22T00:00:00');
+  const now=new Date();
+  const days=Math.max(0,Math.ceil((wedding-now)/(1000*60*60*24)));
+  const el=document.getElementById('cdDays');
+  if(el){ el.textContent=days; if(days===0){el.textContent='Leo!';document.getElementById('cdLbl').textContent='ni leo · today';} }
+})();
+</script>
+</body>
+</html>
