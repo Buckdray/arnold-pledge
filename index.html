@@ -119,12 +119,11 @@ body{font-family:'Georgia','Segoe UI',serif;background:
           <select id="pCur" class="cur">
             <option value="TZS">TZS</option>
             <option value="RWF">RWF</option>
-            <option value="USD">USD</option>
+            
           </select>
         </div>
       </div>
       <button id="submitBtn" class="submit" onclick="sendPledge()">Tuma Ahadi · Send My Pledge</button>
-      <div class="foot">Kwa <b>Arnold Bukangwa</b> · 22.08.2026</div>
       <div class="blessing">Tunatanguliza shukrani zetu za dhati 🌿<br>Mungu akubariki sana</div>
       <div class="divider"><span class="leaf">🌿 ❦ 🌿</span></div>
       <div class="steps">
@@ -153,8 +152,7 @@ const SUPABASE_ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const PAY={
   TZS:[['Stanbic Bank','9120003845239'],['Mixx by Yas','0715123050'],['Selcom/Mpesa','0756444796'],['Jina','Irene Mlaki']],
-  RWF:[['Simu / Momo','0789178174'],['Jina','Andrew Amabilis Bukangwa']],
-  USD:[['Simu / Momo','0789178174'],['Jina','Andrew Amabilis Bukangwa']]
+  RWF:[['Simu / Momo','0789178174'],['Jina','Andrew Amabilis Bukangwa']]
 };
 let sb=null;
 if(SUPABASE_URL&&SUPABASE_ANON) sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON);
